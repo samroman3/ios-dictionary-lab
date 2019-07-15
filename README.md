@@ -3,7 +3,7 @@
 Fork and clone this repo. On your fork, answer and commit the follow questions. When you are finished, submit the link to your repo on Canvas.
 
 
-## Question 1
+## Question 1 - done
 
 - Create an instance of a dictionary called `citiesDict` that maps 3 countries to their capital cities.
 
@@ -11,8 +11,19 @@ Fork and clone this repo. On your fork, answer and commit the follow questions. 
 
 - Translate at least 3 of the capital names into another language.
 
+```
+var citiesDict: [String:String] = ["United Kingdom" : "London","Mexico" : "Mexico City", "Canada" : "Ottawa"]
 
-## Question 2
+citiesDict["Sweden"] = "Stockholm"
+citiesDict["Pakistan"] = "Islamabad"
+
+citiesDict["United Kingdom"] = "Landan" //London in arabic
+citiesDict["Mexico"] = "Madinat Maksiku" // Mexico City in arabic
+citiesDict["Sweden"] = "Satukahulam" //Stockholm in arabic
+```
+
+
+## Question 2 - todo
 
 `var someDict:[String:Int] = ["One": 1, "Two": 4, "Three": 9, "Four": 16, "Five": 25]`
 
@@ -28,8 +39,54 @@ Fork and clone this repo. On your fork, answer and commit the follow questions. 
 
 - Add 2 to every value inside of `someDict`.
 
+```
+var someDict:[String:Int] = ["One": 1, "Two": 4, "Three": 9, "Four": 16, "Five": 25]
 
-## Question 3
+//1
+if let three = someDict["Three"], let five = someDict["Five"]{
+print(three+five)
+
+//2
+someDict["Five"] = 13
+someDict["Six"] = 44
+
+//3
+var product = 1
+
+for (_,value) in someDict{
+product *= value
+}
+
+someDict["productUpToSeven"] = product
+
+//4
+someDict["sumUpToSix"]
+
+var sum = 0
+
+for (key,value) in someDict {
+if key == "Seven" || key == "productUpToSeven" {
+continue }
+else {
+sum += value
+}
+}
+
+print(sum)
+
+//5
+someDict.removeValue(forKey: "productUpToSeven")
+someDict.removeValue(forKey: "sumUpToSix")
+
+print(someDict)
+
+//6
+for (_,v) in someDict {
+v + 2
+}
+```
+
+## Question 3- done
 
 Create a variable that is explicitly typed as a dictionary that maps strings to floating point numbers. Initialize the variable to the data shown in the table below which lists an author name and their comprehensibility score.
 
@@ -40,7 +97,24 @@ Create a variable that is explicitly typed as a dictionary that maps strings to 
 | John Steinbeck	| 2.3 |
 | C.S. Lewis | 9.9 |
 | Jon Krakauer | 6.1 |
+```
+var authorDict: [String:Double] = ["Mark Twain": 8.9, "Nathaniel Hawthorne": 5.1, "John Steinbeck": 2.3, "C.S. Lewis" : 9.9, "Jon Krakauer" : 6.1]
 
+print(authorDict["John Steinbeck"]!)
+
+authorDict["Erick Larson"] = 9.2
+
+if authorDict["Jon Krakauer"]! > authorDict["Mark Twain"]! {
+print("Jon Krakauer")
+} else {
+print("Mark Twain")
+}
+
+for (key,value) in authorDict {
+print(key,value)
+}
+
+```
 Using the dictionary created in the previous problem, do the following:
 
 - Print out the floating-point score for “John Steinbeck”.
@@ -52,7 +126,7 @@ Using the dictionary created in the previous problem, do the following:
 - Use a for-loop to iterate through the dictionary you created at the beginning of the problem, and print out the content in the form of key: value, one entry per line.
 
 
-## Question 4
+## Question 4 - done
 
 You are given a dictionary code of type [String:String] which has values for all lowercase letters. The code dictionary represents a way to encode a message. For example if code["a"] = "z" and code["b"] = "x" the encoded version if "ababa" will be "zxzxz". You are also given a message which contains only lowercase letters and spaces. Use the `code` dictionary below to encode the message and print it.
 
@@ -87,45 +161,76 @@ var code = [
 ]
 
 var message = "hello world"
+
+var encodedHello = String()
+
+for i in message {
+if i == " "{ encodedHello.append(" ") }
+if let encodei = code[String(i)]{
+encodedHello.append(encodei)
+}
+}
+print(encodedHello)
+
+
 ```
 
 You are also given an `encodedMessage` which contains only lowercase letters and spaces. Use the `code` dictionary to decode the message and print it.
-`var encodedMessage = "uijt nfttbhf jt ibse up sfbe"`
+```
+var encodedMessage = "uijt nfttbhf jt ibse up sfbe"`
+
+for c in encodedMessage{
+if c == " "{
+decodedMessage.append(" ")
+}
+for(key, value) in code{
+if String(c) == value{
+decodedMessage.append(key)
+}
+}
+}
+print(decodedMessage)
+```
 
 
-## Question 5
+## Question 5 - done
 
 You are given an array of dictionaries. Each dictionary in the array contains exactly 2 keys `“firstName”` and `“lastName”`. Create an array of strings called `firstNames` that contains only the values for `“firstName”` from each dictionary.
 
 ```swift
-var people: [[String:String]] = [
-    [
-        "firstName": "Calvin",
-        "lastName": "Newton"
-    ],
-    [
-        "firstName": "Garry",
-        "lastName": "Mckenzie"
-    ],
-    [
-        "firstName": "Leah",
-        "lastName": "Rivera"
-    ],
-    [
-        "firstName": "Sonja",
-        "lastName": "Moreno"
-    ],
-    [
-        "firstName": "Noel",
-        "lastName": "Bowen"
-    ]
-]
+var people: [[String:String]] = [ [ "firstName": "Calvin", "lastName": "Newton"],["firstName":"Garry", "lastName": "Mckenzie"],["firstName": "Leah","lastName": "Rivera"],["firstName": "Sonja","lastName": "Moreno"],["firstName": "Noel","lastName": "Bowen"]]
+
+
+print(people[1]["lastName"]!)
+for person in people {
+
+}
+var lastNames: [String] = []
+
+for person in people {
+for (k,v) in person {
+if k == "lastName" {
+lastNames.append(v)
+}
+}
+}
+print(lastNames)
+
+var fullNames: [String] = []
+
+for person in people {
+for (k,v) in person {
+fullNames.append(v)
+}
+}
+
+print(fullNames)
 ```
 
 Now, create an array of strings called `fullNames` that contains the values for `“firstName”` and `“lastName”` from the dictionary separated by a space.
 
 
-## Question 6
+## Question 6 - todo
 
 You are given an array of dictionaries. Each dictionary in the array describes the score of a person. Find the person with the best score and print his full name.
 
@@ -158,6 +263,28 @@ var peopleWithScores: [[String: String]] = [
     ]
 ]
 ```
+var topScorer = (fname: "", lname: "", score: "0")
+
+for arrayOfDictionaries in peopleWithScores {
+let keys = arrayOfDictionaries.keys.sorted()
+var fname = "", lname = "", score = ""
+for key in keys{
+if key == "firstName", let fn = arrayOfDictionaries[key]{
+fname = fn
+}
+if key == "lastName", let ln = arrayOfDictionaries[key]{
+lname = ln
+}
+if key == "score", let sc = arrayOfDictionaries[key]{
+score = sc
+}
+}
+if let score = Int(score), let topScore = Int(topScorer.score), score > topScore {
+topScorer = (fname,lname,String(score))
+}
+}
+
+print("The best score, \(topScorer.score), is held by \(topScorer.fname) \(topScorer.lname).")
 
 Print out the dictionary above in the following format:  **full name - score**
 
@@ -170,6 +297,34 @@ You are given an array of integers. The frequency of a number is the number of t
 
 Print the numbers in ascending order followed by their frequency.
 
+```
+var numbers = [1, 2, 3, 2, 3, 5, 2, 1, 3, 4, 2, 2, 2]
+
+var frequencyOfNumbers = [Int : Int]()
+
+numbers.sort()
+
+var currentNum = numbers[0]
+var counter = 0
+
+for number in numbers {
+if number == currentNum {
+counter += 1
+frequencyOfNumbers[number] = counter
+} else {
+currentNum = number
+counter = 1
+frequencyOfNumbers[number] = counter
+}
+}
+let keys = frequencyOfNumbers.keys.sorted()
+for key in keys {
+if let value = frequencyOfNumbers[key] {
+print("(\(key): \(value))", terminator: " ")
+}
+}
+```
+
 
 ## Question 8
 
@@ -181,7 +336,14 @@ Print the most common letter in the string below:
 ## Question 9
 
 Write code that creates a dictionary where the keys are Ints between 0 and 20 inclusive, and each key's value is its cube.
+```
+var cubedNumbers = [Int: Int]()
+for number in 0...20 {
+cubedNumbers[number] = number * number * number
+}
 
+print(cubedNumbers)
+```
 
 ## Question 10
 
@@ -190,6 +352,16 @@ Write code that iterates through `testStates` and prints out whether or not that
 ```swift
 let statePop = ["Alabama": 4.8, "Alaska": 0.7, "Arizona": 6.7, "Arkansas": 3.0]
 let testStates = ["California","Arizona", "Alabama", "New Mexico"]
+//
+
+let statePopKeys = statePop.keys
+for state in testStates {
+if statePopKeys.contains(state) {
+print("\(state) is a key in statePop.")
+} else {
+print("\(state) is not a key in statePop.")
+}
+}
 ```
 
 
@@ -234,7 +406,20 @@ let arr1 = [2, 4, 5, 6, 8, 10, 12]
 let arr2 = [1, 2, 3, 4, 5, 6]
 let arr3 = [5, 6, 7, 8, 9, 10, 11, 12]
 let arr4 = [1, 3, 4, 5, 6, 7, 9]
+
+var arrayofArrs = [arr1,arr2,arr3,arr4]
+
+var setArr: Set <Int> = []
+
+for i in arrayofArrs {
+setArr = Set(i).union(setArr)
+}
+
+print(setArr.sorted())
+
+
 ```
+
 
 
 ## Question 14
@@ -272,4 +457,5 @@ Britain is a history of repeated injuries and usurpations, all having in direct 
 establishment of an absolute Tyranny over these States. To prove this, let Facts be submitted to a
 candid world.
 """
+```
 ```
